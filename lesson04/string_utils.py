@@ -51,3 +51,4 @@ class StringUtils:
         if self.contains(string, symbol):
             string = string.replace(symbol, "")
         return string
+    
