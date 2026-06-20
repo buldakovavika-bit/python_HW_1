@@ -1,20 +1,30 @@
 from selenium.webdriver.common.by import By
-from store.base_page import BasePage
+from selenium.webdriver.support import expected_conditions as EC
 
 
-class CheckoutPage(BasePage):
+class CheckoutPage:
 
     FIRST_NAME = (By.ID, "first-name")
     LAST_NAME = (By.ID, "last-name")
     POSTAL_CODE = (By.ID, "postal-code")
-    CONTINUE = (By.ID, "continue")
-    TOTAL = (By.CLASS_NAME, "summary_total_label")
+    CONTINUE_BUTTON = (By.ID, "continue")
+    TOTAL_PRICE = (By.CLASS_NAME, "summary_total_label")
 
-    def fill_customer_info(self, first_name, last_name, postal_code):
-        self.find(self.FIRST_NAME).send_keys(first_name)
-        self.find(self.LAST_NAME).send_keys(last_name)
-        self.find(self.POSTAL_CODE).send_keys(postal_code)
-        self.click(self.CONTINUE)
+    def __init__(self, driver):
+        self.driver = driver
+        self.wait = driver.wait
 
-    def get_total(self):
-        return self.find(self.TOTAL).text
+    def fill_user_data(self, first_name, last_name, postal_code):
+        self.wait.until(
+            EC.presence_of_element_located(self.FIRST_NAME)
+        ).send_keys(first_name)
+
+        self.driver.find_element(*self.LAST_NAME).send_keys(last_name)
+        self.driver.find_element(*self.POSTAL_CODE).send_keys(postal_code)
+
+        self.driver.find_element(*self.CONTINUE_BUTTON).click()
+
+    def get_total_price(self):
+        return self.wait.until(
+            EC.presence_of_element_located(self.TOTAL_PRICE)
+        ).text
