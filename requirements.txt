@@ -1,3 +1,5 @@
 pytest
 selenium
 requests
+sqlalchemy
+psycopg2-binary
