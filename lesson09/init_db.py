@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from models import Base
 
-DATABASE_URL = "postgresql://postgres:123@localhost:5432/posgres"
+DATABASE_URL = "postgresql://postgres:123@localhost:5432/postgres"
 
 
 def init_database():

@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from models import Base, Course
 
 # Строка подключения к БД
-DATABASE_URL = "postgresql://postgres:123@localhost:5432/posgres"
+DATABASE_URL = "postgresql://postgres:123@localhost:5432/postgres"
 
 
 @pytest.fixture(scope="session")
